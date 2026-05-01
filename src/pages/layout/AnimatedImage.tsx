@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import  { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { OVERLAY_STAGES } from "../../constants/Data";
 
@@ -191,7 +191,11 @@ export default function CinematicScatteredSequence() {
         <div 
           key={`brand-${i}`} 
           className="brand-layer" 
-          ref={(el) => (brandRefs.current[i] = el)}
+          ref={(el) => {
+            if(el){
+              brandRefs.current[i] = el
+            }
+          }}
           style={{ zIndex: 10 - i }} 
         >
           <img src={stage.src} alt={`brand-${i}`} className="brand-img" />

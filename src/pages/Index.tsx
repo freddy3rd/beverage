@@ -1,6 +1,5 @@
 
-import { useRef } from "react"
-import AboutSection from "./components/About_v1"
+
 
 import HeroSection from "./components/Hero"
 import Navbar from "@/components/layout/Header"
