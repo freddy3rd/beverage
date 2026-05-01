@@ -249,7 +249,7 @@ const handleFlavorChange = (nextIndex: number) => {
 
 
           
-          <div className={`h-full relative transition-colors duration-500 bg-radial-[at_left] from-mist-100 to-${activeCan.color} justift-center items-center`}>
+          <div className={`h-full relative transition-colors duration-500 bg-radial-[at_left] from-mist-100 to-[${activeCan.color}] justift-center items-center`}>
   
             <div className="absolute right-0 w-full md:w-[90%] h-full flex flex-col md:justify-center md:px-12 px-4 z-10">
 

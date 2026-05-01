@@ -46,7 +46,7 @@ const OVERLAY_STAGES: ImageOverlay[] = [
 const BEVERAGE_CONFIG: CanConfig[] = [
   {
     img: images.sprite,
-    color: "sprite",
+    color: "#00b140",
     bgImage: cans_image.sprite_bg,
     headling: 'SPRITE',
     quote: "Obey Your Thirst.",
@@ -54,7 +54,7 @@ const BEVERAGE_CONFIG: CanConfig[] = [
   },
   {
     img: images.coke,
-    color: "coke",
+    color: "#f40009",
     bgImage: cans_image.coke_bg,
     headling: 'COKE',
     quote: "Real Magic in Every Sip.",
@@ -62,7 +62,7 @@ const BEVERAGE_CONFIG: CanConfig[] = [
   },
   {
     img: images.fanta,
-    color: "fanta",
+    color: "#ff8300",
     bgImage: cans_image.fanta_bg,
     headling: 'FANTA',
     quote: "Boldly Fruity, Unapologetically Bright.",
