@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { BEVERAGE_CONFIG } from "@/constants/Data";
 import { useGSAP } from "@gsap/react";
-// import { SplitText } from "gsap/SplitText";
+
 import { Flip } from "gsap/Flip";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,6 +12,7 @@ import { images } from "@/constants/Image";
 gsap. registerPlugin(Flip, ScrollTrigger)
 
 const Hero = () => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [displayIndex, setDisplayIndex] = useState(0);
   const activeCan = BEVERAGE_CONFIG[displayIndex];
 
@@ -34,67 +35,55 @@ const Hero = () => {
   const quoteRef = useRef<any>(null)
   const descRef = useRef<any>(null)
 
- useGSAP(() => {
-    if (!headlineRef.current || !imageRef.current) return;
+useGSAP(() => {
+    if (!isImageLoaded || !headlineRef.current || !imageRef.current) return;
 
-    console.log("imageRef", imageRef.current)
     const tl = gsap.timeline();
-    
-    // Create SplitText
-    // const split = new SplitText(headlineRef.current, { type: "chars" });
-    // const splitQuote = new SplitText(quoteRef.current, { type: "words" });
-    
 
-    tl.from(containerRef.current, {
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    })
-    // 1. Reveal Headline Characters fast
-    // 2. Drop the can with a faster bounce
-    .from(imageRef.current, {
-      y: -800,
-      rotate: -20,
-      opacity: 0,
-      duration: 1,
-      ease: "back.out(1.7)", // Snappier than bounce
-    }, "-=0.5")
-    // .from(split.chars, {
-    //   y: 200,
-    //   // opacity: 0,
-    //   // rotateX: -90, // Adds a 3D flip effect
-    //   autoAlpha: 0,
-    //   stagger: 0.08, // Fast stagger
-    //   duration: 1,
-    //   ease: "expo.out",
-    // }, "-=0.3")
-    // .from(splitQuote.words, {
-    //   y: 60,
-    //   opacity: 0,
-    //   // rotateX: -90, // Adds a 3D flip effect
-    //   autoAlpha: 0,
-    //   stagger: 0.08, // Fast stagger
-    //   duration: 1,
-    //   ease: "expo.out",
-    // }, "-=0.2")
-    .from(descRef.current, {
-      x: 60,
-      opacity: 0,
-      ease: "power2.in",
-    }, "<")
-    // 3. Slide up supporting text
-    .from(".animate-text", {
-      y: 20,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.5,
-      ease: "power3.out",
-    }, "-=0.7");
+    // Force a "set" to ensure everything is perfectly positioned 
+    // before the animation begins.
+    gsap.set([headlineRef.current, quoteRef.current, descRef.current, ".animate-text"], {
+      autoAlpha: 0
+    });
 
+    tl.fromTo(containerRef.current, 
+      { opacity: 0 },
+      { opacity: 1, duration: 0.6 }
+    )
+    .fromTo(imageRef.current, 
+      { y: -800, rotate: -20, opacity: 0 },
+      { 
+        y: 0, 
+        rotate: -10, 
+        opacity: 1, 
+        duration: 1, 
+        ease: "back.out(1.7)",
+        clearProps: "transform" // Helps prevent conflicts with Flip later
+      }, 
+      "-=0.5"
+    )
+    .fromTo(headlineRef.current, 
+      { y: 100, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 1, ease: "expo.out" }, 
+      "-=0.3"
+    )
+    .fromTo(quoteRef.current, 
+      { y: 60, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 1, ease: "expo.out" }, 
+      "-=0.2"
+    )
+    .fromTo(descRef.current, 
+      { x: 60, autoAlpha: 0 },
+      { x: 0, autoAlpha: 1, duration: 0.8, ease: "power2.out" }, 
+      "<"
+    )
+    .fromTo(".animate-text", 
+      { y: 20, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, stagger: 0.1, duration: 0.5, ease: "power3.out" }, 
+      "-=0.7"
+    );
 
-
-    // return () => split.revert();
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isImageLoaded] });
   
 
 
@@ -177,57 +166,61 @@ const handleFlavorChange = (nextIndex: number) => {
   }, "-=0.4");
 };
 
-useEffect(() =>{
+// useEffect(() =>{
 
-      if(imageRef. current){
+//       if(imageRef.current){
 
-        gsap.timeline({
-          scrollTrigger:{ 
-            trigger: containerRef.current,
-            start: "top top",
-            scrub: 1,
-            snap: 1,
-            invalidateOnRefresh: true,
-            // markers: true
-            
-          }
-        })
-        .add(Flip.fit(imageRef.current, secondContainerRef.current, {scale: true, absolute: true, duration: 1, ease: 'none' }) as gsap.core.Tween);
-      }
+       
+//       }
 
-    gsap.timeline({
-      scrollTrigger: {
-          trigger: secondSection.current,
-          start: "top 80%",
-          invalidateOnRefresh: true,
-          toggleActions: "play none none reverse", // optional but useful
-        }
-      })
-      .fromTo(
-        bgOverlay.current,
-        { height: 0,
-
-
-        },
-        {
-
-          height: "100%",
-          duration: 0.8,
-         ease: "power4.inOut",
-        }
-      );
 
 
       
 
-})
+// })
 
 useGSAP(() => {
+   if (!isImageLoaded || !imageRef.current || !secondContainerRef.current) return;
   // 1. Grab the elements inside the hook to ensure they exist in the DOM
   const elements = gsap.utils.toArray('.dataRef');
   console.log("element", elements)
 
   if (elements.length === 0 || !contentParentRef.current) return;
+  gsap.timeline({
+    scrollTrigger:{ 
+      trigger: containerRef.current,
+      start: "top top",
+      scrub: 1,
+      snap: 1,
+      invalidateOnRefresh: true,
+      // markers: true
+      
+    }
+  })
+  .add(Flip.fit(imageRef.current, secondContainerRef.current, {scale: true, absolute: true, duration: 1, ease: 'none' }) as gsap.core.Tween);
+
+
+  gsap.timeline({
+    scrollTrigger: {
+        trigger: secondSection.current,
+        start: "top 80%",
+        invalidateOnRefresh: true,
+        toggleActions: "play none none reverse", // optional but useful
+      }
+    })
+    .fromTo(
+      bgOverlay.current,
+      { height: 0,
+
+
+      },
+      {
+
+        height: "100%",
+        duration: 0.8,
+      ease: "power4.inOut",
+      }
+    );
 
   gsap.timeline({
     scrollTrigger: {
@@ -249,7 +242,7 @@ useGSAP(() => {
     duration: 0.8,
     // stagger: 0.2,
   });
-}, { scope: secondSection});
+}, { scope: secondSection, dependencies: [isImageLoaded] });
 
 // md: 768px
   return (
@@ -331,6 +324,7 @@ useGSAP(() => {
 
         <img 
           ref={imageRef}
+          onLoad={() => setIsImageLoaded(true)}
           src={activeCan.img} 
           alt={activeCan.headling}
           className='absolute inset-0 m-auto -rotate-10 md:z-30 h-[50%] md:h-[75%] object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)] select-none pointer-events-none'
