@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type ReactElement } from 'react';
+import { useLayoutEffect, useRef} from 'react';
 import gsap from 'gsap';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
 
