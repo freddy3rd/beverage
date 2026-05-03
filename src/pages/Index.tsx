@@ -3,7 +3,7 @@
 
 import HeroSection from "./components/Hero"
 import Navbar from "@/components/layout/Header"
-import BeverageBento from "./components/Profile"
+
 
 
 function Index() {

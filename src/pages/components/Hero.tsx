@@ -233,7 +233,7 @@ useGSAP(() => {
       trigger: contentParentRef.current,
       start: "top 20%", // Changed to 80% so you see it enter from the bottom
       toggleActions: "play reverse play reverse",
-      markers: true, 
+      // markers: true, 
     },
   })
   .from(secondheadlineRef.current,{
@@ -274,7 +274,7 @@ useGSAP(() => {
               }}
             />
           
-          <div className='h-full w-full z-10 absolute flex items-end p-12 ml-20'>
+          <div className='h-full w-full z-10 absolute flex items-end p-12 ml'>
             <div className="animate-text flex items-center gap-3 text-white font-bold text-md uppercase [writing-mode:vertical-lr] rotate-180">
               <div className="h-20 w-[4px] bg-white" />
               Scroll Down
@@ -283,9 +283,9 @@ useGSAP(() => {
         </div>
  
           <div 
-          style={{ "--target-color": activeCan.color } as React.CSSProperties}
-          // className={`h-full relative transition-colors duration-500 bg-radial-[at_left] from-mist-100 to-(--target-color) justift-center items-center`}>
-          className={`h-full relative transition-colors duration-500 ${activeCan.gradient} justift-center items-center`}>
+            style={{ "--target-color": activeCan.color } as React.CSSProperties}
+            // className={`h-full relative transition-colors duration-500 bg-radial-[at_left] from-mist-100 to-(--target-color) justift-center items-center`}>
+            className={`h-full relative transition-colors duration-500 ${activeCan.gradient} justift-center items-center`}>
   
             <div className="absolute right-0 w-full md:w-[90%] h-full flex flex-col md:justify-center md:px-12 px-4 z-10">
 
@@ -381,10 +381,9 @@ useGSAP(() => {
         <div className="absolute inset-0 h-full w-full ">
             <img src={images.water_splash} className="absolute inset-0 object-contain w-full h-full opacity-80"/>
         </div>
-        <div className="w-full h-full grid grid-cols-3 max-w-350 m-auto py-20" id="productContainer">
+        <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 max-w-350 m-auto py-20" id="productContainer">
 
-          <div 
-            className="relative w-full h-full">
+          <div className="relative w-full h-full">
             <div className="gap-8 h-full flex flex-col justify-center">
               
               <div className="overflow-y-hidden">
@@ -394,7 +393,6 @@ useGSAP(() => {
                   style={{
                     fontSize: "clamp(80px, 10vw, 140px)",
                     color: "white",
-                    
                     fontStyle: "italic",
                   }}
                 >  
