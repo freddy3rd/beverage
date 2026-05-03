@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BEVERAGE_CONFIG } from "@/constants/Data";
 import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/SplitText";
+// import { SplitText } from "gsap/SplitText";
 import { Flip } from "gsap/Flip";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -37,11 +37,12 @@ const Hero = () => {
  useGSAP(() => {
     if (!headlineRef.current || !imageRef.current) return;
 
+    console.log("imageRef", imageRef.current)
     const tl = gsap.timeline();
     
     // Create SplitText
-    const split = new SplitText(headlineRef.current, { type: "chars" });
-    const splitQuote = new SplitText(quoteRef.current, { type: "words" });
+    // const split = new SplitText(headlineRef.current, { type: "chars" });
+    // const splitQuote = new SplitText(quoteRef.current, { type: "words" });
     
 
     tl.from(containerRef.current, {
@@ -58,24 +59,24 @@ const Hero = () => {
       duration: 1,
       ease: "back.out(1.7)", // Snappier than bounce
     }, "-=0.5")
-    .from(split.chars, {
-      y: 200,
-      // opacity: 0,
-      // rotateX: -90, // Adds a 3D flip effect
-      autoAlpha: 0,
-      stagger: 0.08, // Fast stagger
-      duration: 1,
-      ease: "expo.out",
-    }, "-=0.3")
-    .from(splitQuote.words, {
-      y: 60,
-      opacity: 0,
-      // rotateX: -90, // Adds a 3D flip effect
-      autoAlpha: 0,
-      stagger: 0.08, // Fast stagger
-      duration: 1,
-      ease: "expo.out",
-    }, "-=0.2")
+    // .from(split.chars, {
+    //   y: 200,
+    //   // opacity: 0,
+    //   // rotateX: -90, // Adds a 3D flip effect
+    //   autoAlpha: 0,
+    //   stagger: 0.08, // Fast stagger
+    //   duration: 1,
+    //   ease: "expo.out",
+    // }, "-=0.3")
+    // .from(splitQuote.words, {
+    //   y: 60,
+    //   opacity: 0,
+    //   // rotateX: -90, // Adds a 3D flip effect
+    //   autoAlpha: 0,
+    //   stagger: 0.08, // Fast stagger
+    //   duration: 1,
+    //   ease: "expo.out",
+    // }, "-=0.2")
     .from(descRef.current, {
       x: 60,
       opacity: 0,
@@ -92,7 +93,7 @@ const Hero = () => {
 
 
 
-    return () => split.revert();
+    // return () => split.revert();
   }, { scope: containerRef });
   
 
@@ -219,7 +220,7 @@ useEffect(() =>{
 
       
 
-}, [imageRef.current])
+})
 
 useGSAP(() => {
   // 1. Grab the elements inside the hook to ensure they exist in the DOM
