@@ -17,14 +17,20 @@ import leaf_5 from "@/assets/subject/leaves/compressed/mint_5.webp"
 
 import background from "@/assets/backgrounds/compressed/background.webp"
 import ground_water from "@/assets/backgrounds/compressed/ground_water.webp"
+import water_splash from "@/assets/backgrounds/compressed/water_splash.webp"
 
 import sprite_bg from "@/assets/images/compressed/sprite_bg.webp"
 import coke_bg from "@/assets/images/compressed/coke_bg.webp"
 import fanta_bg from "@/assets/images/compressed/fanta_bg.webp"
 
-import logo_img from "@/assets/images/beverage_logo.png"
+import ritual_sprite from "@/assets/images/compressed/ritual_sprite.webp"
+import ritual_coke from "@/assets/images/compressed/ritual_coke.webp"
+import ritual_fanta from "@/assets/images/compressed/ritual_fanta.webp"
+
+import logo_img from "@/assets/images/compressed/beverage_logo.webp"
 
 const logo = logo_img
+
 const cans_image = {
     sprite_bg,
     coke_bg,
@@ -47,7 +53,12 @@ const images  = {
     leaf_4,
     leaf_5,
     background,
-    ground_water
+    ground_water,
+    water_splash,
+    
+    ritual_sprite,
+    ritual_coke,
+    ritual_fanta,
 } as const;
 
 

@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
           <div className="flex justify-end items-center gap-4 md:gap-8">
             <div className="hidden md:flex items-center gap-8">
               {['Product','About'].map((item) => (
-                <a key={item} href="#" className="group font-heading relative text-slate-800 text-[14px] font-extrabold uppercase tracking-[0.2em]">
+                <a key={item} href="#" className="group font-heading relative text-white text-[14px] font-extrabold uppercase tracking-[0.2em]">
                   {item}
                   <span className="absolute -bottom-1 left-0 w-0 h-px bg-text-slate-800 transition-all duration-500 group-hover:w-full"></span>
                 </a>
